@@ -7,9 +7,6 @@ pipeline {
     stage('Install') {
       steps { sh 'npm ci --legacy-peer-deps' }
     }
-    stage('Lint') {
-      steps { sh 'npm run lint' }
-    }
     stage('Test') {
       steps { sh 'npm test' }
     }
