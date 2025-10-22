@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
   release:
-    types: [published]
+    types: [ published ]
 
 permissions:
   contents: read
@@ -17,14 +17,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set image tags
+      - name: Set lowercase image tags
         id: meta
         run: |
+          REPO_LC=$(echo "${GITHUB_REPOSITORY}" | tr '[:upper:]' '[:lower:]')
           SHA_TAG=${GITHUB_SHA::7}
-          if [[ "${{ github.event_name }}" == "release" ]]; then
-            echo "tags=ghcr.io/${{ github.repository }}:${{ github.event.release.tag_name }},ghcr.io/${{ github.repository }}:latest" >> $GITHUB_OUTPUT
+          if [[ "${GITHUB_EVENT_NAME}" == "release" ]]; then
+            echo "tags=ghcr.io/${REPO_LC}:${GITHUB_REF_NAME},ghcr.io/${REPO_LC}:latest" >> $GITHUB_OUTPUT
           else
-            echo "tags=ghcr.io/${{ github.repository }}:${SHA_TAG}" >> $GITHUB_OUTPUT
+            echo "tags=ghcr.io/${REPO_LC}:${SHA_TAG}" >> $GITHUB_OUTPUT
           fi
 
       - name: Log in to GHCR
