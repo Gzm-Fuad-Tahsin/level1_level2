@@ -8,7 +8,7 @@ services:
       - PORT=3001
     ports:
       - "3001:3001"
-    command: sh -c "npm ci && npm test && node src/index.js"
+    command: sh -c "npm ci --legacy-peer-deps && npm test && node src/index.js"
   app_prod:
     build: .
     container_name: app_prod
