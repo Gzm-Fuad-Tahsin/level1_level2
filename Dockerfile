@@ -27,7 +27,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install only production dependencies
-RUN npm ci --omit=dev
+RUN npm ci
 
 # Copy built code and any necessary assets from builder
 COPY --from=builder /app/dist ./dist
