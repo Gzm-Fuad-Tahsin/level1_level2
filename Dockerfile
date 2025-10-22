@@ -30,7 +30,7 @@ COPY package*.json ./
 RUN npm ci --legacy-peer-deps
 
 # Copy built code and any necessary assets from builder
-COPY --from=builder /app/dist ./dist
+
 COPY --from=builder /app/src ./src
 COPY --from=builder /app/.env* ./ || true
 
