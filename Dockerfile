@@ -32,7 +32,6 @@ RUN npm ci --legacy-peer-deps
 # Copy built code and any necessary assets from builder
 
 COPY --from=builder /app/src ./src
-COPY --from=builder /app/.env* ./ || true
 
 # Set environment variables
 ENV NODE_ENV=production
